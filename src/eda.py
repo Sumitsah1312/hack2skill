@@ -2,6 +2,7 @@ import time
 import json
 import numpy as np
 import pandas as pd
+import zipfile
 
 from datetime import datetime
 
@@ -94,25 +95,22 @@ candidate_list = []
 
 print("Loading Candidates...")
 
-with open(
-    "../data/candidates.jsonl",
-    "r",
-    encoding="utf-8"
-) as f:
 
-    for line in f:
+with zipfile.ZipFile("../data/candidates.zip", "r") as z:
+    with z.open("candidates.jsonl") as f:
+        for line in f:
 
-        candidate = json.loads(line)
+            candidate = json.loads(line)
 
-        candidate_profile = (
-            build_candidate_profile(
-                candidate
+            candidate_profile = (
+                build_candidate_profile(
+                    candidate
+                )
             )
-        )
 
-        candidate_list.append(
-            candidate_profile
-        )
+            candidate_list.append(
+                candidate_profile
+            )
 
 print(
     f"Loaded {len(candidate_list)} candidates"

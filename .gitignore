@@ -33,7 +33,7 @@ submission.csv
 *.pickle
 
 # Archives
-*.zip
+# *.zip
 *.tar
 *.gz
 *.7z
